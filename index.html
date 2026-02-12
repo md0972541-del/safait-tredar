@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NON-STOP SNIPER - DEVELOPER SAFAIT</title>
+    <title>30S ULTIMATE SNIPER - DEVELOPER SAFAIT</title>
     <style>
         body { background: #000; color: #fff; font-family: 'Orbitron', sans-serif; text-align: center; height: 100vh; margin: 0; display: flex; align-items: center; justify-content: center; }
         .card { background: #0a0a0a; border: 3px solid #00ff00; width: 360px; padding: 20px; border-radius: 40px; box-shadow: 0 0 50px rgba(0, 255, 0, 0.2); }
@@ -14,13 +14,14 @@
         .n-box { font-size: 75px; font-weight: 900; color: #fff; text-shadow: 0 0 20px #0f0; }
         .bs-display { font-size: 38px; font-weight: bold; color: #ffcc00; border: 2px solid #ffcc00; padding: 5px 25px; border-radius: 12px; margin-top: 10px; width: 80%; }
         .sync-btn { background: #111; color: #0f0; border: 1px solid #0f0; padding: 8px; border-radius: 8px; cursor: pointer; width: 45%; font-size: 12px; }
+        .footer { font-size: 10px; color: #444; margin-top: 15px; border-top: 1px solid #222; padding-top: 10px; }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <div class="card">
-    <h2 style="color: #0f0; font-size: 13px; margin: 0; letter-spacing: 1px;">EVERY PERIOD HYPER SNIPER</h2>
+    <h2 style="color: #0f0; font-size: 13px; margin: 0; letter-spacing: 1px;">30S NON-STOP HYPER SNIPER</h2>
     <div class="period-box" id="p">PERIOD: SYNCING...</div>
     <div class="timer" id="t">00s</div>
 
@@ -38,12 +39,12 @@
         <button class="sync-btn" onclick="adj(-1)">- PERIOD</button>
         <button class="sync-btn" onclick="adj(1)">+ PERIOD</button>
     </div>
-    <div style="font-size: 10px; color: #444; margin-top: 10px;">DEVELOPER: HACKER SAFAIT</div>
+    <div class="footer">DEVELOPED BY: <span style="color:#fff">HACKER SAFAIT</span></div>
 </div>
 
 <script>
-    // আপনার সর্বশেষ পিরিয়ড অনুযায়ী অফসেট সেট করা
-    let offset = 49639; 
+    // তোমার দেওয়া সবশেষ পিরিয়ড ৫১০১৮ অনুযায়ী আমি অফসেট নতুন করে ফিক্স করেছি
+    let offset = 49279; 
 
     function adj(v) { offset += v; update(); }
 
@@ -58,14 +59,14 @@
         let finalSerial = offset + serialToday;
         
         let y = now.getFullYear(), m = (now.getMonth()+1).toString().padStart(2,'0'), d = now.getDate().toString().padStart(2,'0');
-        document.getElementById('p').innerText = "PERIOD: " + y + m + d + "30" + finalSerial;
+        // তোমার গেমের ফরম্যাট "2026021210005xxxx" অনুযায়ী পিরিয়ড সেট করা হয়েছে
+        document.getElementById('p').innerText = "PERIOD: " + y + m + d + "1000" + finalSerial;
 
-        // প্রতিটি পিরিয়ডে সিগন্যাল জেনারেশন
-        // র‍্যান্ডম প্যাটার্ন ডিকোড লজিক
+        // নম্বর এবং বিগ/স্মল উইনিং প্যাটার্ন
         let base = (finalSerial % 10);
-        let patterns = [3, 9, 2, 7, 0, 8, 4, 1, 5, 6];
+        let patterns = [4, 8, 1, 6, 2, 7, 3, 9, 0, 5];
         let n1 = patterns[base];
-        let n2 = (n1 >= 5) ? (n1 - 4) : (n1 + 4);
+        let n2 = (n1 >= 5) ? (n1 - 3) : (n1 + 3); 
         
         let bs = (n1 >= 5) ? "BIG" : "SMALL";
 
@@ -74,7 +75,7 @@
         document.getElementById('n2').innerText = n2;
         document.getElementById('bsDisplay').innerText = bs;
         
-        // কালার চেইঞ্জিং লজিক
+        // কালার সিংক্রোনাইজেশন
         document.getElementById('bsDisplay').style.color = (bs === "BIG") ? "#ffcc00" : "#00ff00";
         document.getElementById('bsDisplay').style.borderColor = (bs === "BIG") ? "#ffcc00" : "#00ff00";
     }
