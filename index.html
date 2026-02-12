@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NON-STOP SNIPER - DEVELOPER SAFAIT</title>
+    <style>
+        body { background: #000; color: #fff; font-family: 'Orbitron', sans-serif; text-align: center; height: 100vh; margin: 0; display: flex; align-items: center; justify-content: center; }
+        .card { background: #0a0a0a; border: 3px solid #00ff00; width: 360px; padding: 20px; border-radius: 40px; box-shadow: 0 0 50px rgba(0, 255, 0, 0.2); }
+        .period-box { background: #111; padding: 10px; border-radius: 12px; margin: 5px 0; color: #0f0; font-weight: bold; border: 1px solid #222; font-size: 14px; }
+        .timer { font-size: 45px; font-weight: 900; color: #ff0000; margin-bottom: 10px; }
+        .res-card { background: #000; border: 2px dashed #333; border-radius: 25px; padding: 15px; min-height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .num-wrapper { display: flex; justify-content: center; gap: 20px; width: 100%; margin-top: 10px; }
+        .n-box { font-size: 75px; font-weight: 900; color: #fff; text-shadow: 0 0 20px #0f0; }
+        .bs-display { font-size: 38px; font-weight: bold; color: #ffcc00; border: 2px solid #ffcc00; padding: 5px 25px; border-radius: 12px; margin-top: 10px; width: 80%; }
+        .sync-btn { background: #111; color: #0f0; border: 1px solid #0f0; padding: 8px; border-radius: 8px; cursor: pointer; width: 45%; font-size: 12px; }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="card">
+    <h2 style="color: #0f0; font-size: 13px; margin: 0; letter-spacing: 1px;">EVERY PERIOD HYPER SNIPER</h2>
+    <div class="period-box" id="p">PERIOD: SYNCING...</div>
+    <div class="timer" id="t">00s</div>
+
+    <div class="res-card">
+        <div style="font-size: 11px; color: #aaa; margin-bottom: 5px;">LIVE SERVER PREDICTION</div>
+        <div class="num-wrapper">
+            <div class="n-box" id="n1">?</div>
+            <div class="n-box" id="n2">?</div>
+        </div>
+        <div class="bs-display" id="bsDisplay">--</div>
+        <div id="status" style="font-size: 10px; color: #0f0; margin-top: 10px;">SYSTEM ACTIVE ●</div>
+    </div>
+
+    <div style="display:flex; justify-content: space-between; margin-top:10px;">
+        <button class="sync-btn" onclick="adj(-1)">- PERIOD</button>
+        <button class="sync-btn" onclick="adj(1)">+ PERIOD</button>
+    </div>
+    <div style="font-size: 10px; color: #444; margin-top: 10px;">DEVELOPER: HACKER SAFAIT</div>
+</div>
+
+<script>
+    // আপনার সর্বশেষ পিরিয়ড অনুযায়ী অফসেট সেট করা
+    let offset = 49639; 
+
+    function adj(v) { offset += v; update(); }
+
+    function update() {
+        const now = new Date();
+        const sec = now.getSeconds();
+        let rem = 30 - (sec % 30);
+        document.getElementById('t').innerText = rem.toString().padStart(2, '0') + "s";
+
+        let totalSecToday = (now.getHours() * 3600) + (now.getMinutes() * 60) + sec;
+        let serialToday = Math.floor(totalSecToday / 30);
+        let finalSerial = offset + serialToday;
+        
+        let y = now.getFullYear(), m = (now.getMonth()+1).toString().padStart(2,'0'), d = now.getDate().toString().padStart(2,'0');
+        document.getElementById('p').innerText = "PERIOD: " + y + m + d + "30" + finalSerial;
+
+        // প্রতিটি পিরিয়ডে সিগন্যাল জেনারেশন
+        // র‍্যান্ডম প্যাটার্ন ডিকোড লজিক
+        let base = (finalSerial % 10);
+        let patterns = [3, 9, 2, 7, 0, 8, 4, 1, 5, 6];
+        let n1 = patterns[base];
+        let n2 = (n1 >= 5) ? (n1 - 4) : (n1 + 4);
+        
+        let bs = (n1 >= 5) ? "BIG" : "SMALL";
+
+        // ডিসপ্লে আপডেট
+        document.getElementById('n1').innerText = n1;
+        document.getElementById('n2').innerText = n2;
+        document.getElementById('bsDisplay').innerText = bs;
+        
+        // কালার চেইঞ্জিং লজিক
+        document.getElementById('bsDisplay').style.color = (bs === "BIG") ? "#ffcc00" : "#00ff00";
+        document.getElementById('bsDisplay').style.borderColor = (bs === "BIG") ? "#ffcc00" : "#00ff00";
+    }
+
+    setInterval(update, 1000);
+    update();
+</script>
+</body>
+</html>
